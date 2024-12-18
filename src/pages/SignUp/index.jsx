@@ -15,11 +15,11 @@ export function SignUp() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const navigate = new useNavigate()
+  const navigate = useNavigate()
 
   function handleSignUp() {
     if (!name || !email || !password) {
-      return alert("Preencha todos os campos")
+      alert("Preencha todos os campos")
       navigate("/")
     }
 
