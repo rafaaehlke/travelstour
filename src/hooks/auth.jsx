@@ -12,8 +12,9 @@ function AuthProvider({ children }) {
       const response = await api.post("/sessions", { email, password })
       const { user, token } = response.data
 
+      // Inseri um token do tipo Bearer no cabeçalho de todas as requisicoes que o usuario ira fazer
       api.defaults.headers.authorization = `Bearer ${token}`
-      setData({ user, token })
+      setData({ user, token }) // armazena as informacoes do usuario, dentro do state
 
     } catch (e) {
       if (e.response) {
