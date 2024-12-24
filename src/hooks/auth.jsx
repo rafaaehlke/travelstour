@@ -17,7 +17,9 @@ function AuthProvider({ children }) {
 
 
       // Inseri um token do tipo Bearer no cabeçalho de todas as requisicoes que o usuario ira fazer
-      api.defaults.headers.authorization = `Bearer ${token}`
+      // api.defaults.headers.authorization = `Bearer ${token}`
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;  // Método novo
+
       setData({ user, token }) // armazena as informacoes do usuario, dentro do state
 
     } catch (e) {
@@ -41,7 +43,8 @@ function AuthProvider({ children }) {
     const token = localStorage.getItem("@travelstour:token")
 
     if (token || user) {
-      api.defaults.headers.authorization = `Bearer ${token}`
+      // api.defaults.headers.authorization = `Bearer ${token}` // método antigo
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;  // Método novo
     }
     setData({
       token,
