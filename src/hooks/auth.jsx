@@ -22,8 +22,8 @@ function AuthProvider({ children }) {
 
       setData({ user, token }) // armazena as informacoes do usuario, dentro do state
 
-    } catch (e) {
-      if (e.response) {
+    } catch (error) {
+      if (error.response) {
         alert(e.response.data.message)
       } else {
         alert("Não foi possível logar")
@@ -36,6 +36,23 @@ function AuthProvider({ children }) {
     localStorage.removeItem("@travelstour:token")
 
     setData({})
+  }
+
+  async function updateProfile({ user }) {
+    try {
+     
+      await api.put("/users", user)
+      localStorage.setItem("@travelstour:user", JSON.stringify(user))
+      
+      setData({ user, token: data.token })
+      alert("Perfil Atualizado")
+    } catch (error) {
+      if (error.response) {
+        alert(e.response.data.message)
+      } else {
+        alert("Não foi possível atualizar o perfil")
+      }
+    }
   }
 
   useEffect(() => {
@@ -56,6 +73,7 @@ function AuthProvider({ children }) {
     <AuthContext.Provider value={{
       signIn,
       signOut,
+      updateProfile,
       user: data.user
     }}>
       {children}
