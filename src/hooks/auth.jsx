@@ -24,7 +24,7 @@ function AuthProvider({ children }) {
 
     } catch (error) {
       if (error.response) {
-        alert(e.response.data.message)
+        alert(error.response.data.message)
       } else {
         alert("Não foi possível logar")
       }
@@ -56,7 +56,7 @@ function AuthProvider({ children }) {
       alert("Perfil Atualizado")
     } catch (error) {
       if (error.response) {
-        alert(e.response.data.message)
+        alert(error.response.data.message)
       } else {
         alert("Não foi possível atualizar o perfil")
       }
