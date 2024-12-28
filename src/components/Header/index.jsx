@@ -13,7 +13,8 @@ export function Header() {
       <Profile to="/profile">
         <img
           src={avatarUrl}
-          alt="Foto do usuário" />
+          alt={user.name}
+        />
 
         <div>
           <span>Bem Vindo</span>
