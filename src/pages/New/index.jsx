@@ -7,18 +7,31 @@ import { Input } from '../../components/input'
 import { Container, Form } from './styles'
 import { Link } from 'react-router-dom';
 import { useState } from 'react'
+import { TbUvIndex } from 'react-icons/tb'
 
 export function New() {
   const [links, setLinks] = useState([])
   const [newLink, setNewLink] = useState("")
+
+  const [tags, setTags] = useState([])
+  const [newTag, setNewTag] = useState("")
 
   function handleAddLink() {
     setLinks(beforeState => [...beforeState, newLink])
     setNewLink("")
   }
 
-  function handleRemoveLink(deleted){
+  function handleRemoveLink(deleted) {
     setLinks(beforeState => beforeState.filter(link => link !== deleted))
+  }
+
+  function handleAddTag() {
+    setTags(beforeState => [...beforeState, newTag])
+    setNewTags("")
+  }
+
+  function HandleRemoveTag(deleted) {
+    setTags(beforeState => beforeState.filter(tag => tag !== deleted))
   }
 
   return (
@@ -59,8 +72,25 @@ export function New() {
 
           <Section title="Marcadores">
             <div className='tags'>
-              <NoteItem value="Chile" />
-              <NoteItem isNew placeholder="Nova tag" />
+
+              {
+                tags.map((tag, index) => (
+                  <NoteItem
+                    key={String(index)}
+                    value={tag}
+                    onClick={() => HandleRemoveTag(tag)}
+                  />
+              ))
+              }
+
+              <NoteItem
+                isNew
+                placeholder="Nova tag"
+                onChange={e => setNewTag(e.target.value)}
+                value={newTag}
+                onClick={handleAddTag}
+              />
+
             </div>
           </Section>
 
