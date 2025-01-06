@@ -24,8 +24,17 @@ export function Details() {
     fetchNote()
   }, [])
 
-  function handleBack(){
+  function handleBack() {
     navigate("/")
+  }
+
+  async function handleRemove() {
+    const confirm = window.confirm("Você gostaria de deletar está nota?")
+
+    if (confirm) {
+      await api.delete(`/notes/${params.id}`)
+      handleBack()
+     }
   }
 
   return (
@@ -37,7 +46,10 @@ export function Details() {
         <main>
           <Content>
 
-            <ButtonText title="Excluir Nota" />
+            <ButtonText
+              title="Excluir Nota"
+              onClick={handleRemove}
+            />
 
             <h1>
               {data.title}
@@ -67,16 +79,16 @@ export function Details() {
               <Section title="Marcadores">
                 {
                   data.tags.map(tag => (
-                  <Tag 
-                  key={String(tag.id)}
-                  title={tag.name} />
+                    <Tag
+                      key={String(tag.id)}
+                      title={tag.name} />
                   ))
                 }
               </Section>
             }
-            <Button 
-            title="Voltar"
-            onClick={handleBack} />
+            <Button
+              title="Voltar"
+              onClick={handleBack} />
 
           </Content>
         </main>
