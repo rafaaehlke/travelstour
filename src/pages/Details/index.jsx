@@ -25,7 +25,7 @@ export function Details() {
   }, [])
 
   function handleBack() {
-    navigate("/")
+    navigate(-1)  //volta uma rota anterior sem pesar no histórico de navegaçao
   }
 
   async function handleRemove() {
